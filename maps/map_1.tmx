@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.4" tiledversion="2020.12.18" orientation="orthogonal" renderorder="right-down" width="25" height="20" tilewidth="50" tileheight="50" infinite="0" nextlayerid="5" nextobjectid="1">
+ <tileset firstgid="1" source="Map_tiles.tsx"/>
+ <tileset firstgid="145" source="1.tsx"/>
+ <tileset firstgid="146" source="4.tsx"/>
+ <tileset firstgid="148" source="2.tsx"/>
+ <tileset firstgid="150" source="rock1.tsx"/>
+ <tileset firstgid="152" source="Ship1.tsx"/>
+ <tileset firstgid="156" source="tree1.tsx"/>
+ <tileset firstgid="158" source="tree2.tsx"/>
+ <tileset firstgid="160" source="10.tsx"/>
+ <layer id="1" name="Слой тайлов 1" width="25" height="20">
+  <data encoding="base64" compression="zlib">
+   eJzt0D0LgCAUhWGrucK2itr6WKv//986wxUuolcll8DhgXMXe0krpXRRFL82QAU1NLT5nfLWCYvDCi100NPm99des0eYYKbN71BjqNfsDXY4aPM7plHqNfuCGx7a/I5plHpd2/7HMY1Sr2vb30htlHp9UhulXp+cvT45e31eOScpKQ==
+  </data>
+ </layer>
+ <layer id="3" name="Слой тайлов 2" width="25" height="20">
+  <data encoding="base64" compression="zlib">
+   eJy1U1sSwiAMzIf996MH8mhO9QB9aK0v4KhSJTMxJqVx2p3ZKaQhuwSoAaBekBLGuDPUeBg0WqLhSU6TqfFk81PkWdHoiMa/ni294kRv3DNl+EMj1yPcF+aVCtHf1D40f/wsSjJ2JAapBv1q9Vo2lzzjP6/k1BmNTtDAcS/kFwA7zirGK2FdAN07xi8T3ugZHBK1dVjX8j41De1+oG+/gIb1jXFeAfZD5Joa91j/trKG1KsNvO8ZHBPnYvj0ZRa2hroUsR9jX76AfikDy3FkbPGJ4H57Mm7S12d8IiS/hZA3vjEnxOcA/QZCRMNyPfziBbOzuW0=
+  </data>
+ </layer>
+</map>
