@@ -25,7 +25,10 @@ def generate_level(level, pos_x, pos_y):
             Tile(x, y, image)
             if level.get_tile_image(x, y, 1):
                 image = level.get_tile_image(x, y, 1)
-                Tile(x, y, image)
+                Object(x, y, image)
+            if level.get_tile_image(x, y, 2):
+                image = level.get_tile_image(x, y, 2)
+                AdditionalObjects(x, y, image)
     new_player = MainCharacter(pos_x, pos_y)
     return new_player, pos_x, pos_y
 
@@ -33,6 +36,24 @@ def generate_level(level, pos_x, pos_y):
 class Tile(pygame.sprite.Sprite):
     def __init__(self, pos_x, pos_y, image):
         super().__init__(tiles_group)
+        self.image = image
+        self.rect = self.image.get_rect().move(
+            tile_size * pos_x, tile_size * pos_y)
+
+
+class Object(pygame.sprite.Sprite):
+    def __init__(self, pos_x, pos_y, image):
+        super().__init__(objects_group)
+        self.id = level_map.tiledgidmap[level_map.get_tile_gid(pos_x, pos_y, 1)]
+        self.image = image
+        self.rect = self.image.get_rect().move(
+            tile_size * pos_x, tile_size * pos_y)
+
+
+class AdditionalObjects(pygame.sprite.Sprite):
+    def __init__(self, pos_x, pos_y, image):
+        super().__init__(additional_objects)
+        self.id = level_map.tiledgidmap[level_map.get_tile_gid(pos_x, pos_y, 2)]
         self.image = image
         self.rect = self.image.get_rect().move(
             tile_size * pos_x, tile_size * pos_y)
@@ -46,7 +67,6 @@ class MainCharacter(pygame.sprite.Sprite):
             tile_size * pos_x, tile_size * pos_y)
         self.side = 'r'
         self.angle = 0
-        self.flag_x = False
 
     def update(self, args):
         side = self.side
@@ -61,6 +81,11 @@ class MainCharacter(pygame.sprite.Sprite):
             self.rect.y -= tile_size
             if pygame.sprite.spritecollideany(self, horizontal_borders):
                 self.rect.y += tile_size
+            elif pygame.sprite.spritecollideany(self, objects_group):
+                if pygame.sprite.spritecollideany(self, objects_group).id in transparent_objects:
+                    screen.blit(pygame.sprite.spritecollideany(self, objects_group).image, (self.rect.x, self.rect.y))
+                elif pygame.sprite.spritecollideany(self, objects_group).id not in obstacles:
+                    self.rect.y += tile_size
             self.side = 'u'
 
         elif args[pygame.K_DOWN]:
@@ -74,6 +99,11 @@ class MainCharacter(pygame.sprite.Sprite):
             self.rect.y += tile_size
             if pygame.sprite.spritecollideany(self, horizontal_borders):
                 self.rect.y -= tile_size
+            elif pygame.sprite.spritecollideany(self, objects_group):
+                if pygame.sprite.spritecollideany(self, objects_group).id in transparent_objects:
+                    screen.blit(pygame.sprite.spritecollideany(self, objects_group).image, (self.rect.x, self.rect.y))
+                elif pygame.sprite.spritecollideany(self, objects_group).id not in obstacles:
+                    self.rect.y -= tile_size
             self.side = 'd'
 
         elif args[pygame.K_RIGHT]:
@@ -87,6 +117,11 @@ class MainCharacter(pygame.sprite.Sprite):
             self.rect.x += tile_size
             if pygame.sprite.spritecollideany(self, vertical_borders):
                 self.rect.x -= tile_size
+            elif pygame.sprite.spritecollideany(self, objects_group):
+                if pygame.sprite.spritecollideany(self, objects_group).id in transparent_objects:
+                    screen.blit(pygame.sprite.spritecollideany(self, objects_group).image, (self.rect.x, self.rect.y))
+                elif pygame.sprite.spritecollideany(self, objects_group).id not in obstacles:
+                    self.rect.x -= tile_size
             self.side = 'r'
 
         elif args[pygame.K_LEFT]:
@@ -100,6 +135,11 @@ class MainCharacter(pygame.sprite.Sprite):
             self.rect.x -= tile_size
             if pygame.sprite.spritecollideany(self, vertical_borders):
                 self.rect.x += tile_size
+            elif pygame.sprite.spritecollideany(self, objects_group):
+                if pygame.sprite.spritecollideany(self, objects_group).id in transparent_objects:
+                    screen.blit(pygame.sprite.spritecollideany(self, objects_group).image, (self.rect.x, self.rect.y))
+                elif pygame.sprite.spritecollideany(self, objects_group).id not in obstacles:
+                    self.rect.x += tile_size
             self.side = 'l'
 
 
@@ -120,11 +160,17 @@ pygame.init()
 size = width, height = 1250, 1000
 screen = pygame.display.set_mode(size)
 pygame.display.set_caption('Танчики')
+fps = 60
+clock = pygame.time.Clock()
 main_character_image = load_image('main_character.png')
 horizontal_borders = pygame.sprite.Group()
 vertical_borders = pygame.sprite.Group()
 all_sprites = pygame.sprite.Group()
 tiles_group = pygame.sprite.Group()
+objects_group = pygame.sprite.Group()
+obstacles = [130, 131, 132, 144, 305]
+transparent_objects = [156, 158, 160]
+additional_objects = pygame.sprite.Group()
 player_group = pygame.sprite.Group()
 player, level_x, level_y = generate_level(load_level('map_1.tmx'), 0, 11)
 Border(0, 0, width, -1)
@@ -139,6 +185,9 @@ while running:
         if event.type == pygame.KEYDOWN:
             player_group.update(pygame.key.get_pressed())
     tiles_group.draw(screen)
+    additional_objects.draw(screen)
     player_group.draw(screen)
+    objects_group.draw(screen)
+    clock.tick(fps)
     pygame.display.flip()
 pygame.quit()
