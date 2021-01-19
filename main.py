@@ -147,6 +147,8 @@ def terminate():
 def maps(key=None):
     '''Открывается окно выбора карты, на которой игрок хочет сыграть,
      но карты проходятся одна за другой'''
+    maps_fon = pygame.transform.scale(load_image('maps_fon_2.jpg'), (WIDTH, HEIGHT))
+    screen.blit(maps_fon, (0, 0))
     if key:
         if key == 1:
             free_cells = [130, 131, 132, 144, 305, 306, 307]
@@ -154,7 +156,7 @@ def maps(key=None):
             transparent_objects = [156, 158, 160]
             water = [1, 2, 3, 13, 14, 15, 25, 26, 27, 37, 38, 39, 49, 50, 51]
             main(free_cells, free_cells_spawn, transparent_objects, water,
-                 'map_1.tmx', 1, 0, 11)
+                 'map_1.tmx', 1, 0, 12)
         if key == 2:
             free_cells = [20, 130, 131, 132, 144, 168, 255, 289, 407, 408,
                           1610612866, 1610612867,
@@ -164,8 +166,8 @@ def maps(key=None):
             transparent_objects = [400, 403, 405]
             water = [13, 25, 26, 27, 145]
             main(free_cells, free_cells_spawn, transparent_objects, water,
-                 'map_2.tmx', 2, 0, 0)
-    screen.blit(maps_fon, (0, 0))
+                 'map_2.tmx', 2, 0, 1)
+
     while True:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -1036,7 +1038,6 @@ pygame.display.set_icon(load_image('main_character.png'))
 main_character_image = load_image('main_character.png')
 image_death = load_image('animation_death_2.png')
 bullet_image = load_image('bullet.png')
-maps_fon = load_image('maps_fon_2.jpg')
 enemies_images = ['enemy_1.png', 'enemy_2.png', 'enemy_3.png']
 shop_images = ['main_character_2.png', 'main_character_3.png',
                'main_character_4.png']
