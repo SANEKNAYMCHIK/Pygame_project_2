@@ -57,7 +57,7 @@ def main(cells, cells_spawn, objects, waterr, map, num_map, x, y):
     while running:
         for event in pygame.event.get():
             if kill_enemy:
-                pygame.mixer.music.load('sound/death.mp3')
+                pygame.mixer.music.load(load_sound('death.mp3'))
                 pygame.mixer.music.play()
                 kill_enemy.pop(0).death()
                 death_enemies += 1
@@ -94,10 +94,15 @@ def main(cells, cells_spawn, objects, waterr, map, num_map, x, y):
     sys.exit()
 
 
+def resource_path(relative):
+    if hasattr(sys, "_MEIPASS"):
+        return os.path.join(sys._MEIPASS, relative)
+    return os.path.join(relative)
+
 def load_level(filename):
     '''Загрузка карты'''
     global level_map, tile_size, height_map, width_map
-    level_map = pytmx.load_pygame('maps/{}'.format(filename))
+    level_map = pytmx.load_pygame(resource_path(os.path.join('maps', filename)))
     width_map = level_map.width
     height_map = level_map.height
     tile_size = level_map.tilewidth
@@ -106,9 +111,15 @@ def load_level(filename):
 
 def load_image(name):
     '''Загрузка изображения'''
-    fullname = os.path.join('data/', name)
+    fullname = os.path.join(resource_path(os.path.join('data', name)))
     image = pygame.image.load(fullname).convert_alpha()
     return image
+
+
+def load_sound(name):
+    '''Загрузка звука'''
+    sound = os.path.join(resource_path(os.path.join('sound', name)))
+    return sound
 
 
 def generate_level(level, pos_x, pos_y):
@@ -182,7 +193,7 @@ def maps(key=None):
                     main(free_cells, free_cells_spawn, transparent_objects,
                          water, 'map_1.tmx', 1, 0, 12)
                 if 637 < event.pos[0] < 934 and 15 < event.pos[1] < 195 and \
-                        passed_maps == 1:
+                        passed_maps >= 1:
                     free_cells = [20, 130, 131, 132, 144, 168, 255, 289, 407,
                                   408, 1610612866, 1610612867,
                                   1610612868, 2147484056, 2147484055]
@@ -432,7 +443,7 @@ def start_screen():
 def victory():
     '''Функция победы, при уничтожении главного персонажа открывается окно
      с информационной надписью и несколькими кнопками'''
-    pygame.mixer.music.load('sound/win.mp3')
+    pygame.mixer.music.load(load_sound('win.mp3'))
     pygame.mixer.music.play()
     pygame.mixer.music.play()
     global passed_maps
@@ -466,7 +477,7 @@ def victory():
 def defeat():
     '''Функция проигрыша, при уничтожении главного персонажа открывается окно
      с информационной надписью и несколькими кнопками'''
-    pygame.mixer.music.load('sound/losing.mp3')
+    pygame.mixer.music.load(load_sound('losing.mp3'))
     pygame.mixer.music.play()
     font = pygame.font.Font(None, 50)
     font2 = pygame.font.Font(None, 25)
@@ -628,7 +639,7 @@ class Bullet(pygame.sprite.Sprite):
                         self.kill()
             else:
                 if pygame.sprite.spritecollideany(self, player_group):
-                    pygame.mixer.music.load('sound/death.mp3')
+                    pygame.mixer.music.load(load_sound('death.mp3'))
                     pygame.mixer.music.play()
                     player_death.append(
                         pygame.sprite.spritecollideany(self,
@@ -659,7 +670,7 @@ class Bullet(pygame.sprite.Sprite):
                         self.kill()
             else:
                 if pygame.sprite.spritecollideany(self, player_group):
-                    pygame.mixer.music.load('sound/death.mp3')
+                    pygame.mixer.music.load(load_sound('death.mp3'))
                     pygame.mixer.music.play()
                     player_death.append(
                         pygame.sprite.spritecollideany(self,
@@ -1043,11 +1054,11 @@ shop_images = ['main_character_2.png', 'main_character_3.png',
                'main_character_4.png']
 heart_images = ['heart.png', 'heart_2.png']
 coin_image = load_image('coin.png')
-death_sound = pygame.mixer.Sound('sound/death.mp3')
-collision_sound = pygame.mixer.Sound('sound/collision.mp3')
-water_sound = pygame.mixer.Sound('sound/water.mp3')
-shot_sound = pygame.mixer.Sound('sound/shot.mp3')
-movement_sound = pygame.mixer.Sound('sound/movement.mp3')
+death_sound = pygame.mixer.Sound(load_sound('death.mp3'))
+collision_sound = pygame.mixer.Sound(load_sound('collision.mp3'))
+water_sound = pygame.mixer.Sound(load_sound('water.mp3'))
+shot_sound = pygame.mixer.Sound(load_sound('shot.mp3'))
+movement_sound = pygame.mixer.Sound(load_sound('movement.mp3'))
 horizontal_borders = pygame.sprite.Group()
 vertical_borders = pygame.sprite.Group()
 all_sprites = pygame.sprite.Group()
