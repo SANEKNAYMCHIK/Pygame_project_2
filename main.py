@@ -95,14 +95,17 @@ def main(cells, cells_spawn, objects, waterr, map, num_map, x, y):
 
 
 def resource_path(relative):
-    if hasattr(sys, "_MEIPASS"):
-        return os.path.join(sys._MEIPASS, relative)
-    return os.path.join(relative)
+    try:
+        base_path = sys._MEIPASS
+    except Exception:
+        base_path = os.path.abspath(".")
+    return os.path.join(base_path, relative)
+
 
 def load_level(filename):
     '''Загрузка карты'''
     global level_map, tile_size, height_map, width_map
-    level_map = pytmx.load_pygame(resource_path(os.path.join('maps', filename)))
+    level_map = pytmx.load_pygame(resource_path('maps/{}'.format(filename)))
     width_map = level_map.width
     height_map = level_map.height
     tile_size = level_map.tilewidth
@@ -111,14 +114,14 @@ def load_level(filename):
 
 def load_image(name):
     '''Загрузка изображения'''
-    fullname = os.path.join(resource_path(os.path.join('data', name)))
+    fullname = os.path.join(resource_path('data/{}'.format(name)))
     image = pygame.image.load(fullname).convert_alpha()
     return image
 
 
 def load_sound(name):
     '''Загрузка звука'''
-    sound = os.path.join(resource_path(os.path.join('sound', name)))
+    sound = os.path.join(resource_path('sound/{}'.format(name)))
     return sound
 
 
@@ -158,7 +161,8 @@ def terminate():
 def maps(key=None):
     '''Открывается окно выбора карты, на которой игрок хочет сыграть,
      но карты проходятся одна за другой'''
-    maps_fon = pygame.transform.scale(load_image('maps_fon_2.jpg'), (WIDTH, HEIGHT))
+    maps_fon = pygame.transform.scale(load_image('maps_fon_2.jpg'),
+                                      (WIDTH, HEIGHT))
     screen.blit(maps_fon, (0, 0))
     if key:
         if key == 1:
