@@ -20,3 +20,5 @@
 пробел - выстрел
 
 Приятного времяпрепровождения и приятной игры!
+
+[![Watch the video](https://i.imgur.com/vKb2F1B.png)](C:\Users\Павел\Videos\Desktop\Video of the game.mp4)
