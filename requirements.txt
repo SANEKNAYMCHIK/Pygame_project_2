@@ -1,0 +1,6 @@
+Python 3.8.5
+pygame==2.0.1
+PyTMX==3.24
+pygame_gui==0.5.7
+pyinstaller==4.1
+puyinstaller-hooks-contrib==2020.11
