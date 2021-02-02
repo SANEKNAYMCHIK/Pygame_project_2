@@ -10,8 +10,8 @@
  <tileset firstgid="158" source="tree2.tsx"/>
  <tileset firstgid="160" source="10.tsx"/>
  <tileset firstgid="161" source="water_2.tsx"/>
- <tileset firstgid="162" source="../../pygame/maps/Map_tiles.tsx"/>
- <tileset firstgid="306" source="../../pygame/maps/Ship1.tsx"/>
+ <tileset firstgid="162" source="E:/яндекс.лицей/pygame/maps/Map_tiles.tsx"/>
+ <tileset firstgid="306" source="E:/яндекс.лицей/pygame/maps/Ship1.tsx"/>
  <layer id="1" name="Слой тайлов 1" width="25" height="21">
   <data encoding="csv">
 89,89,89,89,89,89,89,89,89,89,89,89,89,89,89,89,89,89,89,89,89,89,89,89,89,

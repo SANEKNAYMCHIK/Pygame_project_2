@@ -2,17 +2,17 @@
 <map version="1.4" tiledversion="2020.12.18" orientation="orthogonal" renderorder="right-down" width="25" height="21" tilewidth="50" tileheight="50" infinite="0" nextlayerid="4" nextobjectid="1">
  <tileset firstgid="1" source="Map_tiles.tsx"/>
  <tileset firstgid="145" source="water_2.tsx"/>
- <tileset firstgid="146" source="../../pygame/maps/Map_tiles.tsx"/>
+ <tileset firstgid="146" source="E:/яндекс.лицей/pygame/maps/Map_tiles.tsx"/>
  <tileset firstgid="290" source="tiles.tsx"/>
  <tileset firstgid="390" source="rock1.tsx"/>
  <tileset firstgid="392" source="2.tsx"/>
  <tileset firstgid="394" source="crystal.tsx"/>
- <tileset firstgid="395" source="../../pygame/maps/Ship1.tsx"/>
- <tileset firstgid="399" source="../../pygame/maps/1.tsx"/>
- <tileset firstgid="400" source="../../pygame/maps/10.tsx"/>
+ <tileset firstgid="395" source="E:/яндекс.лицей/pygame/maps/Ship1.tsx"/>
+ <tileset firstgid="399" source="E:/яндекс.лицей/pygame/maps/1.tsx"/>
+ <tileset firstgid="400" source="E:/яндекс.лицей/pygame/maps/10.tsx"/>
  <tileset firstgid="401" source="4.tsx"/>
  <tileset firstgid="403" source="tree2.tsx"/>
- <tileset firstgid="405" source="../../pygame/maps/tree1.tsx"/>
+ <tileset firstgid="405" source="E:/яндекс.лицей/pygame/maps/tree1.tsx"/>
  <tileset firstgid="407" source="Ship1.tsx"/>
  <layer id="1" name="Слой тайлов 1" width="25" height="21">
   <data encoding="csv">
