@@ -181,7 +181,7 @@ def maps(key=None):
                           1610612868, 2147484056, 2147484055]
             free_cells_spawn = [130, 131, 132, 289, 1610612866, 1610612867,
                                 1610612868, 144]
-            transparent_objects = [261, 254, 263]
+            transparent_objects = [260, 253, 262]
             water = [2, 3, 14, 15, 13, 25, 26, 27, 145]
             main(free_cells, free_cells_spawn, transparent_objects, water,
                  'map_2.tmx', 2, 0, 1)
@@ -206,7 +206,7 @@ def maps(key=None):
                                   1610612868, 2147484056, 2147484055]
                     free_cells_spawn = [130, 131, 132, 289, 1610612866,
                                         1610612867, 1610612868, 144]
-                    transparent_objects = [261, 254, 263]
+                    transparent_objects = [260, 253, 262]
                     water = [2, 3, 14, 15, 13, 25, 26, 27, 145]
                     main(free_cells, free_cells_spawn, transparent_objects,
                          water, 'map_2.tmx', 2, 0, 1)
@@ -227,8 +227,8 @@ def shop():
     screen.blit(fon, (0, 0))
     font = pygame.font.Font(None, 50)
     text = font.render("Назад", True, (0, 0, 0))
-    img_x_1 = WIDTH - 120
-    img_y_1 = HEIGHT - 40
+    img_x_1 = WIDTH - 240
+    img_y_1 = HEIGHT - 240
     img_x_2 = text.get_width()
     img_y_2 = text.get_height()
     pygame.draw.rect(screen, (60, 170, 60), (img_x_1, img_y_1,
