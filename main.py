@@ -147,9 +147,12 @@ def search_place(x, y):
         pos_x, pos_y = randint(0, width_map - 1), randint(0, height_map - 1)
         if abs(x - pos_x) <= 2 or abs(y - pos_y) <= 2:
             continue
-        if level_map.tiledgidmap[level_map.get_tile_gid(pos_x, pos_y, 1)] \
-                in free_cells_spawn:
-            return pos_x, pos_y
+        try:
+            if level_map.tiledgidmap[level_map.get_tile_gid(pos_x, pos_y, 1)] \
+                    in free_cells_spawn:
+                return pos_x, pos_y
+        except Exception:
+            continue
 
 
 def terminate():
@@ -177,9 +180,9 @@ def maps(key=None):
                           1610612866, 1610612867,
                           1610612868, 2147484056, 2147484055]
             free_cells_spawn = [130, 131, 132, 289, 1610612866, 1610612867,
-                                1610612868]
-            transparent_objects = [400, 403, 405]
-            water = [13, 25, 26, 27, 145]
+                                1610612868, 144]
+            transparent_objects = [261, 254, 263]
+            water = [2, 3, 14, 15, 13, 25, 26, 27, 145]
             main(free_cells, free_cells_spawn, transparent_objects, water,
                  'map_2.tmx', 2, 0, 1)
 
@@ -202,9 +205,9 @@ def maps(key=None):
                                   408, 1610612866, 1610612867,
                                   1610612868, 2147484056, 2147484055]
                     free_cells_spawn = [130, 131, 132, 289, 1610612866,
-                                        1610612867, 1610612868]
-                    transparent_objects = [400, 403, 405]
-                    water = [13, 25, 26, 27, 145]
+                                        1610612867, 1610612868, 144]
+                    transparent_objects = [261, 254, 263]
+                    water = [2, 3, 14, 15, 13, 25, 26, 27, 145]
                     main(free_cells, free_cells_spawn, transparent_objects,
                          water, 'map_2.tmx', 2, 0, 1)
                 if 637 < event.pos[0] < 934 and 15 < event.pos[1] < 195 and \
@@ -764,13 +767,15 @@ class Enemy(pygame.sprite.Sprite):
                 x, y = queue.pop(0)
                 for dx, dy in (1, 0), (0, -1), (-1, 0), (0, 1):
                     next_x, next_y = x + dx, y + dy
+                    try:
+                        cell = level_map.tiledgidmap[level_map.get_tile_gid(
+                            next_x, next_y, 1
+                        )]
+                    except Exception:
+                        continue
                     if 0 <= next_x < width_map and 0 <= next_y < height_map \
-                            and (level_map.tiledgidmap
-                                 [level_map.get_tile_gid(next_x, next_y, 1)]
-                                 in free_cells_spawn or
-                                 level_map.tiledgidmap
-                                 [level_map.get_tile_gid(next_x, next_y, 1)]
-                                 in transparent_objects) and \
+                            and (cell in free_cells_spawn or
+                                 cell in transparent_objects) and \
                             distance[next_y][next_x] == INF and \
                             [next_x, next_y] not in enemies_coords and \
                             [next_x, next_y] not in death_enemies_coords:

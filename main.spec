@@ -6,15 +6,13 @@ import os, pygame_gui
 
 pygame_data_loc = os.path.join(os.path.dirname(pygame_gui.__file__), 'data')
 
-
 a = Analysis(['main.py'],
              pathex=['E:\\яндекс.лицей\\project_2_2'],
              binaries=[],
              datas=[
-	     ('E:\яндекс.лицей\project_2_2\maps\Map_tiles.tsx', 'Map_tiles.tsx'),
-             ('E:\яндекс.лицей\project_2_2\maps\*', 'maps'),
-             ('E:\яндекс.лицей\project_2_2\sound\*', 'sound'),
-             ('E:\яндекс.лицей\project_2_2\data\*', 'data'),
+             ('maps\*', 'maps'),
+             ('sound\*', 'sound'),
+             ('data\*', 'data'),
              (pygame_data_loc, 'pygame_gui\data')],
              hiddenimports=[],
              hookspath=[],
@@ -39,4 +37,4 @@ exe = EXE(pyz,
           upx=True,
           upx_exclude=[],
           runtime_tmpdir=None,
-          console=False, icon='E:\яндекс.лицей\project_2_2\data\main_character.ico')
+          console=True, icon='data\main_character.ico')
