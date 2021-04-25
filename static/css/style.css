@@ -1,0 +1,21 @@
+p {
+   font-size: 26px;
+   font-weight: bold;
+}
+div {
+    color: ##001EB3;
+    font-weight: bold;
+    font-size: 18px;
+}
+a {
+
+   font-size: 120%;
+   font-weight: bold;
+}
+th {
+    font-size: 120%;
+}
+td {
+    font-size: 120%;
+    font-weight: bold;
+}
